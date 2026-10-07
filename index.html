@@ -3,23 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>متجر عبد العزيز للكتب</title>
+<title>متجر رف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><h1>📚 متجر عبد العزيز للكتب</h1><p>موسوعات ومجلدات علمية في مكان واحد</p>
+<header><h1>📚 متجر رف</h1><p>موسوعات ومجلدات علمية في مكان واحد</p>
 <div class="search"><input id="q" placeholder="🔍 ابحث عن كتاب..." oninput="render()"></div></header>
-<nav><a href="#tafsir">📖 التفسير</a><a href="#hadith">📜 الحديث وشروحه</a><a href="#fiqh">⚖️ الفقه والفتاوى</a></nav>
+<nav><a href="#tafsir">📖 التفسير</a><a href="#hadith">📜 الحديث وشروحه</a><a href="#fiqh">⚖️ الفقه والفتاوى</a><button class="cart-btn" onclick="openCart()" aria-label="فتح السلة">🛒 السلة <span id="cartCount" class="badge" hidden>0</span></button></nav>
 
 <section id="tafsir"><h2>📖 قسم التفسير</h2><div class="grid" id="g-tafsir"></div></section>
 <section id="hadith"><h2>📜 قسم الحديث وشروحه</h2><div class="grid" id="g-hadith"></div></section>
 <section id="fiqh"><h2>⚖️ قسم الفقه والفتاوى</h2><div class="grid" id="g-fiqh"></div></section>
 
-<footer>للتواصل: اكتب رقمك هنا &nbsp;|&nbsp; متجر عبد العزيز © 2026</footer>
+<footer>للتواصل: <span dir="ltr">0540711530</span> &nbsp;|&nbsp; متجر رف © 2026</footer>
 
 <div id="popup" onclick="closeItem()"><div id="box" onclick="event.stopPropagation()">
 <img id="pImg" alt=""><h2 id="pName" style="border:0;padding:0;margin:12px 0 4px"></h2>
-<p class="price" id="pPrice"></p><ul id="pList"></ul><button onclick="closeItem()">إغلاق</button></div></div>
+<p class="price" id="pPrice"></p><ul id="pList"></ul><div class="btns"><button class="add" onclick="addToCart(cur)">أضف للسلة</button><button onclick="closeItem()">إغلاق</button></div></div></div>
+
+<div id="shade" onclick="closeCart()"></div>
+<aside id="drawer" aria-label="السلة">
+<div class="dhead"><h2>سلتك</h2><button class="x" onclick="closeCart()" aria-label="إغلاق السلة">✕</button></div>
+<div id="cartList"></div>
+<div class="dfoot"><p id="cartTotal"></p><button class="add wide" id="checkoutBtn" onclick="checkout()">إرسال الطلب عبر واتساب</button><p class="note">التوصيل والتوفر نؤكدهم معك قبل التجهيز</p></div>
+</aside>
+<div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button onclick="openCart()">عرض السلة</button></div>
 
 <script src="script.js"></script>
 </body>
