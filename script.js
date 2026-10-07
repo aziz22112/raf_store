@@ -22,11 +22,19 @@ function render(){
   for(const c of ["tafsir","hadith","fiqh","general"]){
     const el=document.getElementById("g-"+c);el.innerHTML="";
     products.forEach((p,i)=>{
-      if(p.cat!==c||(q&&!p.name.includes(q)))return;
+      if(p.cat!==c||(q&&!(p.name+" "+(p.author||"")).includes(q)))return;
       el.insertAdjacentHTML("beforeend",
        `<div class="card" onclick="openItem(${i})"><div class="imgbox"><img class="photo" src="${p.img}" alt=""></div><h3>${p.name}</h3><p class="price">${priceText(p)}</p><button class="add" onclick="event.stopPropagation();addToCart(${i})">أضف للسلة</button></div>`);
     });
   }
+  homeBtn.hidden=!q;
+  reveal();
+}
+function reveal(){
+  const cs=document.querySelectorAll(".card:not(.in)");
+  if(!("IntersectionObserver" in window)){cs.forEach(c=>c.classList.add("in"));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+  cs.forEach(c=>io.observe(c));
 }
 function openItem(i){
   const p=products[i];cur=i;
@@ -85,4 +93,22 @@ function showToast(m){
   toastTimer=setTimeout(()=>toast.classList.remove("show"),3500);
 }
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeCart();closeItem()}});
-render();updateCart();
+/* ===== العلماء: لو حطيت صورة باسم المفتاح داخل images/authors/ مثل ibn-taymiyyah.jpg تطلع بدل الحرف ===== */
+const AUTHORS=[["ibn-taymiyyah","شيخ الإسلام ابن تيمية","ابن تيمية","ت"],["shafii","الإمام الشافعي","الشافعي","ش"],["ibn-uthaymeen","الشيخ ابن عثيمين","العثيمين","ع"],["zuhayli","د. وهبة الزحيلي","الزحيلي","ز"],["fawzan","الشيخ صالح الفوزان","الفوزان","ف"],["ibn-katheer","الحافظ ابن كثير","ابن كثير","ك"],["shawkani","الإمام الشوكاني","الشوكاني","ش"],["ibn-aljawzi","الإمام ابن الجوزي","ابن الجوزي","ج"],["alusi","الإمام الآلوسي","الآلوسي","آ"],["ibn-abidin","ابن عابدين","ابن عابدين","ع"],["nabulsi","د. راتب النابلسي","النابلسي","ن"],["aqqad","عباس العقاد","العقاد","ع"],["lahim","أ.د. سليمان اللاحم","اللاحم","ل"],["jibrin","أ.د. عبدالله الجبرين","الجبرين","ج"]];
+function buildAuthors(){
+  authorsGrid.innerHTML=AUTHORS.map(([k,n,m,ch])=>{
+    const c=products.filter(p=>(p.author||"").includes(m)).length;
+    return c?`<button class="au" onclick="pickAuthor('${m}')"><span class="av"><b>${ch}</b><img src="images/authors/${k}.jpg" alt="" onerror="this.remove()"></span><span class="an">${n}</span><span class="ac">${c==1?"كتاب":c==2?"كتابان":c+" كتب"}</span></button>`:"";
+  }).join("");
+}
+function pickAuthor(m){
+  q.value=m;render();
+  const g=[...document.querySelectorAll(".grid")].find(x=>x.children.length);
+  (g?g.parentElement:document.getElementById("tafsir")).scrollIntoView({behavior:"smooth"});
+}
+function goHome(){
+  q.value="";render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+track.innerHTML=[...products,...products].map(p=>`<img src="${p.img}" alt="">`).join("");
+q.value="";buildAuthors();render();updateCart();
