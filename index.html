@@ -12,11 +12,12 @@
 <body>
 <header><h1>📚 متجر رف</h1><p>موسوعات ومجلدات علمية في مكان واحد</p>
 <div class="search"><input id="q" placeholder="🔍 ابحث عن كتاب..." oninput="render()"></div></header>
-<nav><a href="#tafsir">📖 التفسير</a><a href="#hadith">📜 الحديث وشروحه</a><a href="#fiqh">⚖️ الفقه والفتاوى</a><button class="cart-btn" onclick="openCart()" aria-label="فتح السلة">🛒 السلة <span id="cartCount" class="badge" hidden>0</span></button></nav>
+<nav><a href="#tafsir">📖 التفسير</a><a href="#hadith">📜 الحديث وشروحه</a><a href="#fiqh">⚖️ الفقه والفتاوى</a><a href="#general">🏛️ موسوعات وتاريخ وعقيدة</a><button class="cart-btn" onclick="openCart()" aria-label="فتح السلة">🛒 السلة <span id="cartCount" class="badge" hidden>0</span></button></nav>
 
 <section id="tafsir"><h2>📖 قسم التفسير</h2><div class="grid" id="g-tafsir"></div></section>
 <section id="hadith"><h2>📜 قسم الحديث وشروحه</h2><div class="grid" id="g-hadith"></div></section>
 <section id="fiqh"><h2>⚖️ قسم الفقه والفتاوى</h2><div class="grid" id="g-fiqh"></div></section>
+<section id="general"><h2>🏛️ قسم الموسوعات والتاريخ والعقيدة</h2><div class="grid" id="g-general"></div></section>
 
 <footer>للتواصل: <span dir="ltr">0540711530</span> &nbsp;|&nbsp; متجر رف © 2026</footer>
 
@@ -32,6 +33,7 @@
 </aside>
 <div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button onclick="openCart()">عرض السلة</button></div>
 
+<script src="books2.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

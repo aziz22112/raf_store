@@ -9,6 +9,7 @@ const products=[
  {cat:"fiqh",name:"تسهيل الفقه: الجامع لمسائل الفقه القديمة والمعاصرة",price:350,author:"أ.د. عبدالله بن عبدالعزيز الجبرين",publisher:"دار ابن الجوزي",volumes:"",img:"images/tasheel.jpg"}
 ];
 
+if(typeof extraProducts!=="undefined")products.push(...extraProducts);
 let cur=0,toastTimer;
 const fmt=n=>n.toLocaleString("en-US");
 const priceText=p=>p.price?`${fmt(p.price)} ريال`:"السعر عند الاستفسار";
@@ -18,7 +19,7 @@ function saveCart(){try{localStorage.setItem("raf_cart",JSON.stringify(cart))}ca
 
 function render(){
   const q=document.getElementById("q").value.trim();
-  for(const c of ["tafsir","hadith","fiqh"]){
+  for(const c of ["tafsir","hadith","fiqh","general"]){
     const el=document.getElementById("g-"+c);el.innerHTML="";
     products.forEach((p,i)=>{
       if(p.cat!==c||(q&&!p.name.includes(q)))return;
