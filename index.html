@@ -6,20 +6,18 @@
 <title>متجر رف</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><h1>📚 متجر رف</h1><p>موسوعات ومجلدات علمية في مكان واحد</p>
+<header><div class="hero" id="hero" aria-hidden="true"></div><h1>📚 متجر رف</h1><p>كل أنواع الكتب في مكان واحد</p>
 <div class="search"><input id="q" autocomplete="off" placeholder="🔍 ابحث عن كتاب..." oninput="render()"></div></header>
-<div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
-<nav><a href="#authors">🕌 العلماء</a><a href="#tafsir">📖 التفسير</a><a href="#hadith">📜 الحديث وشروحه</a><a href="#fiqh">⚖️ الفقه والفتاوى</a><a href="#general">🏛️ موسوعات وتاريخ وعقيدة</a><button id="homeBtn" class="home-btn" onclick="goHome()" hidden>🏠 الرجوع للرئيسية</button><button class="cart-btn" onclick="openCart()" aria-label="فتح السلة">🛒 السلة <span id="cartCount" class="badge" hidden>0</span></button></nav>
+<div class="marquee home-only" aria-hidden="true"><div class="track" id="track"></div></div>
+<nav></nav>
 
-<section id="authors"><h2>🕌 العلماء والمؤلفون</h2><div class="authors" id="authorsGrid"></div></section>
-<section id="tafsir"><h2>📖 قسم التفسير</h2><div class="grid" id="g-tafsir"></div></section>
-<section id="hadith"><h2>📜 قسم الحديث وشروحه</h2><div class="grid" id="g-hadith"></div></section>
-<section id="fiqh"><h2>⚖️ قسم الفقه والفتاوى</h2><div class="grid" id="g-fiqh"></div></section>
-<section id="general"><h2>🏛️ قسم الموسوعات والتاريخ والعقيدة</h2><div class="grid" id="g-general"></div></section>
+<section id="authors" class="home-only"><h2>✍️ المؤلفون</h2><div class="authors" id="authorsGrid"></div></section>
+<section id="folders" class="home-only"><h2>📂 أقسام الكتب</h2><div class="folders" id="foldersGrid"></div></section>
+<section id="pageView" hidden><div class="vhead"><button class="back" onclick="goHome()">→ الرجوع للرئيسية</button></div><h2 id="vTitle"></h2><div class="grid" id="vGrid"></div></section>
 
 <footer>للتواصل: <span dir="ltr">0540711530</span> &nbsp;|&nbsp; متجر رف © 2026</footer>
 
